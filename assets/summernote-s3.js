@@ -77,7 +77,7 @@ const summernoteS3uploader = {
                         url: 'http://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/',
                         success: function(data, textStatus) {
                             if (textStatus === 'success') {
-                                var url = 'http://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/' + summernoteS3uploader.getFolder() + summernoteS3uploader.fileSlugify(summernoteS3uploader.file.name);
+                                var url = 'https://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/' + summernoteS3uploader.getFolder() + summernoteS3uploader.fileSlugify(summernoteS3uploader.file.name);
                                 summernoteS3uploader.editor.summernote('insertImage', url);
                             }
                         }
