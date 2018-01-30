@@ -1,8 +1,11 @@
+/*jshint esnext: true */
+
 const summernoteS3uploader = {
 
     signEndpoint: '',
     bucket: '',
     folder: '',
+    filenamePrefix: '',
     maxFileSize: 1024000,
     expiration: '',
     file: '',
@@ -26,7 +29,7 @@ const summernoteS3uploader = {
 
     sendImage: function () {
         var obj = {
-            'key': this.getFolder() + this.fileSlugify(this.file.name),
+            'key': this.getFolder() + this.filenamePrefix + this.fileSlugify(this.file.name),
             'Content-Type': this.file.type,
             'success_action_status': '200',
             'x-amz-storage-class': 'REDUCED_REDUNDANCY',
@@ -77,7 +80,7 @@ const summernoteS3uploader = {
                         url: 'http://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/',
                         success: function(data, textStatus) {
                             if (textStatus === 'success') {
-                                var url = 'https://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/' + summernoteS3uploader.getFolder() + summernoteS3uploader.fileSlugify(summernoteS3uploader.file.name);
+                                var url = 'https://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/' + summernoteS3uploader.getFolder() + summernoteS3uploader.filenamePrefix + summernoteS3uploader.fileSlugify(summernoteS3uploader.file.name);
                                 summernoteS3uploader.editor.summernote('insertImage', url);
                             }
                         }

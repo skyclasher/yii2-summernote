@@ -52,6 +52,9 @@ class Summernote extends InputWidget
     /** @var string|JsExpression A folder name. S3 doesn't really use folders but it works like so. */
     public $folder = '';
 
+    /** @var string|JsExpression A prefix to preppend to the filename. */
+    public $filenamePrefix = '';
+
     /** @var integer The maximum file size allowed in bytes */
     public $maxFileSize;
 
@@ -100,7 +103,6 @@ class Summernote extends InputWidget
             ? Html::activeTextarea($this->model, $this->attribute, $this->options)
             : Html::textarea($this->name, $this->value, $this->options);
 
-
         if (empty($this->folder)) $this->folder = "''";
 
         # If uploadToS3 is true, create the onImageUpload callback.
@@ -113,6 +115,7 @@ class Summernote extends InputWidget
                 summernoteS3uploader.signEndpoint = '{$this->signEndpoint}';
                 summernoteS3uploader.bucket = '{$this->bucket}';
                 summernoteS3uploader.folder = {$this->folder};
+                summernoteS3uploader.filenamePrefix = {$this->filenamePrefix};
                 summernoteS3uploader.maxFileSize = '{$this->maxFileSize}';
                 summernoteS3uploader.expiration = '{$this->expiration}';
                 summernoteS3uploader.file = files[0];
