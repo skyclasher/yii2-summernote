@@ -45,6 +45,7 @@ To upload images inserted into the editor to S3, you have to configure a few opt
         'bucket' => 'S3-BUCKET-NAME',
         //'folder' => '',
         'folder' => new \yii\web\JsExpression("function() { return $('#aFormFieldId').val() + '/'; }"),
+        'filenamePrefix' => "'{$model->id}-'",
         'maxFileSize' => 1024000,
         'expiration' => gmdate('Y-m-d\TH:i:s.000\Z', strtotime('+5 minutes')),
         'clientOptions' => [
