@@ -53,7 +53,7 @@ class Summernote extends InputWidget
     public $folder = '';
 
     /** @var string|JsExpression A prefix to preppend to the filename. */
-    public $filenamePrefix = '';
+    public $filenamePrefix = "''";
 
     /** @var integer The maximum file size allowed in bytes */
     public $maxFileSize;
