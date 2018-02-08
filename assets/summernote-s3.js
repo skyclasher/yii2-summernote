@@ -85,7 +85,7 @@ const summernoteS3uploader = {
                         cache: false,
                         contentType: false,
                         processData: false,
-                        url: 'http://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/',
+                        url: 'https://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/',
                         success: function(data, textStatus) {
                             if (textStatus === 'success') {
                                 var url = 'https://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/' + summernoteS3uploader.getFolder() + summernoteS3uploader.getFilenamePrefix() + summernoteS3uploader.fileSlugify(summernoteS3uploader.file.name);
