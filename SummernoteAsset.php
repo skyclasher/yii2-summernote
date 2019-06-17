@@ -21,8 +21,15 @@ class SummernoteAsset extends AssetBundle
     {
         $postfix = YII_DEBUG ? '' : '.min';
 
-        $this->css[] = 'summernote.css';
-        $this->js[] = 'summernote' . $postfix . '.js';
+        if (isset(Yii::$app->params['bsVersion']) && Yii::$app->params['bsVersion'] == 4) {
+            $this->depends = ['yii\bootstrap4\BootstrapPluginAsset'];
+            $this->css[] = 'summernote-bs4.css';
+            $this->js[] = 'summernote-bs4' . $postfix . '.js';
+        } else {
+            $this->depends = ['yii\bootstrap\BootstrapPluginAsset'];
+            $this->css[] = 'summernote.css';
+            $this->js[] = 'summernote' . $postfix . '.js';
+        }
 
         parent::init();
     }
