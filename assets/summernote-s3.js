@@ -1,6 +1,6 @@
 /*jshint esnext: true */
 
-const summernoteS3uploader = {
+var summernoteS3uploader = {
 
     signEndpoint: '',
     bucket: '',
@@ -17,6 +17,23 @@ const summernoteS3uploader = {
         s = s.replace(_slugify_strip_re, '').trim().toLowerCase();
         s = s.replace(_slugify_hyphenate_re, '-');
         return s;
+    },
+
+    getDateTimeString: function () {
+        var date = new Date();
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? '0' + m : m;
+        var d = date.getDate();
+        d = d < 10 ? '0' + d : d;
+        var ho = date.getHours();
+        ho = ho < 10 ? '0' + ho : ho;
+        var mi = date.getMinutes();
+        mi = mi < 10 ? '0' + mi : mi;
+        var se = date.getSeconds();
+        se = se < 10 ? '0' + se : se;
+
+        return y+m+d+ho+mi+se;
     },
 
     getFolder: function () {
@@ -36,8 +53,9 @@ const summernoteS3uploader = {
     },
 
     sendImage: function () {
+        var filenamePrefix = this.getFilenamePrefix();
         var obj = {
-            'key': this.getFolder() + this.getFilenamePrefix() + this.fileSlugify(this.file.name),
+            'key': this.getFolder() + filenamePrefix + this.fileSlugify(this.file.name),
             'Content-Type': this.file.type,
             'success_action_status': '200',
             'x-amz-storage-class': 'REDUCED_REDUNDANCY',
@@ -86,10 +104,10 @@ const summernoteS3uploader = {
                         contentType: false,
                         processData: false,
                         url: 'https://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/',
-                        success: function(data, textStatus) {
+                        complete: function(data, textStatus) {
                             if (textStatus === 'success') {
-                                var url = 'https://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/' + summernoteS3uploader.getFolder() + summernoteS3uploader.getFilenamePrefix() + summernoteS3uploader.fileSlugify(summernoteS3uploader.file.name);
-                                summernoteS3uploader.editor.summernote('insertImage', url);
+                                var url = 'https://' + summernoteS3uploader.bucket + '.s3.amazonaws.com/' + summernoteS3uploader.getFolder() + filenamePrefix + summernoteS3uploader.fileSlugify(summernoteS3uploader.file.name);
+                                setTimeout(function () {  summernoteS3uploader.editor.summernote('insertImage', url); }, 1000);
                             }
                         }
                     });

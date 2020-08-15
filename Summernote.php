@@ -107,6 +107,10 @@ class Summernote extends InputWidget
 
         # If uploadToS3 is true, create the onImageUpload callback.
         if ($this->uploadToS3) {
+            if (!($this->filenamePrefix instanceof JsExpression)) {
+                $this->filenamePrefix = "'{$this->filenamePrefix}'";
+            }
+
             $this->clientOptions['callbacks']['onImageUpload'] = "function(files) {
                 // get current editable container
                 var editor = $(this);
