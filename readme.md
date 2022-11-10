@@ -10,11 +10,11 @@ The preferred way to install this extension is through [Composer](http://getcomp
 
 Either run
 
-	php composer.phar require marqu3s/yii2-summernote "dev-master"
+	php composer.phar require skyclasher/yii2-summernote "dev-master"
 
 or add
 
-	"marqu3s/yii2-summernote": "dev-master"
+	"skyclasher/yii2-summernote": "dev-master"
 
 to the require section of your composer.json
 
